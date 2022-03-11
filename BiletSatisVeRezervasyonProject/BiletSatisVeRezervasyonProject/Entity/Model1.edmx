@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BiletSatisDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBilet">
+          <Key>
+            <PropertyRef Name="BiletID" />
+          </Key>
+          <Property Name="BiletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No" Type="varchar" MaxLength="50" />
+          <Property Name="Kisi" Type="varchar" MaxLength="150" />
+          <Property Name="Cinsiyet" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Otobus" Type="int" />
+          <Property Name="Koltuk" Type="varchar" MaxLength="2" />
+          <Property Name="Guzergah" Type="varchar" MaxLength="50" />
+          <Property Name="Fiyat" Type="int" />
+          <Property Name="Tarih" Type="smalldatetime" />
+          <Property Name="Durum" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TIslem">
+          <Key>
+            <PropertyRef Name="IslemID" />
+          </Key>
+          <Property Name="IslemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="150" />
+          <Property Name="Tarih" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="TOtobus">
+          <Key>
+            <PropertyRef Name="OtobusID" />
+          </Key>
+          <Property Name="OtobusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No" Type="varchar" MaxLength="50" />
+          <Property Name="Marka" Type="varchar" MaxLength="150" />
+          <Property Name="Model" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TSefer">
+          <Key>
+            <PropertyRef Name="SeferID" />
+          </Key>
+          <Property Name="SeferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Otobus" Type="int" />
+          <Property Name="Guzergah" Type="varchar" MaxLength="150" />
+          <Property Name="Saat" Type="varchar" MaxLength="15" />
+          <Property Name="Tarih" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="TYonetici">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kullanici" Type="varchar" MaxLength="100" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TBilet_TOtobus">
+          <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+          <End Role="TBilet" Type="Self.TBilet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOtobus">
+              <PropertyRef Name="OtobusID" />
+            </Principal>
+            <Dependent Role="TBilet">
+              <PropertyRef Name="Otobus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSefer_TOtobus">
+          <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+          <End Role="TSefer" Type="Self.TSefer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOtobus">
+              <PropertyRef Name="OtobusID" />
+            </Principal>
+            <Dependent Role="TSefer">
+              <PropertyRef Name="Otobus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BiletSatisDBModelStoreContainer">
+          <EntitySet Name="TBilet" EntityType="Self.TBilet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIslem" EntityType="Self.TIslem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOtobus" EntityType="Self.TOtobus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TSefer" EntityType="Self.TSefer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TYonetici" EntityType="Self.TYonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBilet_TOtobus" Association="Self.FK_TBilet_TOtobus">
+            <End Role="TOtobus" EntitySet="TOtobus" />
+            <End Role="TBilet" EntitySet="TBilet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSefer_TOtobus" Association="Self.FK_TSefer_TOtobus">
+            <End Role="TOtobus" EntitySet="TOtobus" />
+            <End Role="TSefer" EntitySet="TSefer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BiletSatisDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBilet">
+          <Key>
+            <PropertyRef Name="BiletID" />
+          </Key>
+          <Property Name="BiletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kisi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Otobus" Type="Int32" />
+          <Property Name="Koltuk" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Guzergah" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <Property Name="Durum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TOtobus" Relationship="Self.FK_TBilet_TOtobus" FromRole="TBilet" ToRole="TOtobus" />
+          <Property Name="Fiyat" Type="Int32" />
+          <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TIslem">
+          <Key>
+            <PropertyRef Name="IslemID" />
+          </Key>
+          <Property Name="IslemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TOtobus">
+          <Key>
+            <PropertyRef Name="OtobusID" />
+          </Key>
+          <Property Name="OtobusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Marka" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBilet" Relationship="Self.FK_TBilet_TOtobus" FromRole="TOtobus" ToRole="TBilet" />
+          <NavigationProperty Name="TSefer" Relationship="Self.FK_TSefer_TOtobus" FromRole="TOtobus" ToRole="TSefer" />
+        </EntityType>
+        <EntityType Name="TSefer">
+          <Key>
+            <PropertyRef Name="SeferID" />
+          </Key>
+          <Property Name="SeferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Otobus" Type="Int32" />
+          <Property Name="Guzergah" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Saat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TOtobus" Relationship="Self.FK_TSefer_TOtobus" FromRole="TSefer" ToRole="TOtobus" />
+        </EntityType>
+        <Association Name="FK_TBilet_TOtobus">
+          <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+          <End Role="TBilet" Type="Self.TBilet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOtobus">
+              <PropertyRef Name="OtobusID" />
+            </Principal>
+            <Dependent Role="TBilet">
+              <PropertyRef Name="Otobus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TSefer_TOtobus">
+          <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+          <End Role="TSefer" Type="Self.TSefer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOtobus">
+              <PropertyRef Name="OtobusID" />
+            </Principal>
+            <Dependent Role="TSefer">
+              <PropertyRef Name="Otobus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BiletSatisDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBilet" EntityType="Self.TBilet" />
+          <EntitySet Name="TIslem" EntityType="Self.TIslem" />
+          <EntitySet Name="TOtobus" EntityType="Self.TOtobus" />
+          <EntitySet Name="TSefer" EntityType="Self.TSefer" />
+          <AssociationSet Name="FK_TBilet_TOtobus" Association="Self.FK_TBilet_TOtobus">
+            <End Role="TOtobus" EntitySet="TOtobus" />
+            <End Role="TBilet" EntitySet="TBilet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TSefer_TOtobus" Association="Self.FK_TSefer_TOtobus">
+            <End Role="TOtobus" EntitySet="TOtobus" />
+            <End Role="TSefer" EntitySet="TSefer" />
+          </AssociationSet>
+          <EntitySet Name="TYonetici" EntityType="BiletSatisDBModel.TYonetici" />
+        </EntityContainer>
+        <EntityType Name="TYonetici">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kullanici" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BiletSatisDBModelStoreContainer" CdmEntityContainer="BiletSatisDBEntities">
+          <EntitySetMapping Name="TBilet">
+            <EntityTypeMapping TypeName="BiletSatisDBModel.TBilet">
+              <MappingFragment StoreEntitySet="TBilet">
+                <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="BiletID" ColumnName="BiletID" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Kisi" ColumnName="Kisi" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+                <ScalarProperty Name="Koltuk" ColumnName="Koltuk" />
+                <ScalarProperty Name="Guzergah" ColumnName="Guzergah" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIslem">
+            <EntityTypeMapping TypeName="BiletSatisDBModel.TIslem">
+              <MappingFragment StoreEntitySet="TIslem">
+                <ScalarProperty Name="IslemID" ColumnName="IslemID" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOtobus">
+            <EntityTypeMapping TypeName="BiletSatisDBModel.TOtobus">
+              <MappingFragment StoreEntitySet="TOtobus">
+                <ScalarProperty Name="OtobusID" ColumnName="OtobusID" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TSefer">
+            <EntityTypeMapping TypeName="BiletSatisDBModel.TSefer">
+              <MappingFragment StoreEntitySet="TSefer">
+                <ScalarProperty Name="SeferID" ColumnName="SeferID" />
+                <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+                <ScalarProperty Name="Guzergah" ColumnName="Guzergah" />
+                <ScalarProperty Name="Saat" ColumnName="Saat" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TYonetici">
+            <EntityTypeMapping TypeName="BiletSatisDBModel.TYonetici">
+              <MappingFragment StoreEntitySet="TYonetici">
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Kullanici" ColumnName="Kullanici" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

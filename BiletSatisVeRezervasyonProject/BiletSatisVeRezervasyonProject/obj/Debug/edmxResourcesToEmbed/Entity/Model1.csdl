@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BiletSatisDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBilet">
+    <Key>
+      <PropertyRef Name="BiletID" />
+    </Key>
+    <Property Name="BiletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Kisi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Otobus" Type="Int32" />
+    <Property Name="Koltuk" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Guzergah" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <Property Name="Durum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TOtobus" Relationship="Self.FK_TBilet_TOtobus" FromRole="TBilet" ToRole="TOtobus" />
+    <Property Name="Fiyat" Type="Int32" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TIslem">
+    <Key>
+      <PropertyRef Name="IslemID" />
+    </Key>
+    <Property Name="IslemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TOtobus">
+    <Key>
+      <PropertyRef Name="OtobusID" />
+    </Key>
+    <Property Name="OtobusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Marka" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBilet" Relationship="Self.FK_TBilet_TOtobus" FromRole="TOtobus" ToRole="TBilet" />
+    <NavigationProperty Name="TSefer" Relationship="Self.FK_TSefer_TOtobus" FromRole="TOtobus" ToRole="TSefer" />
+  </EntityType>
+  <EntityType Name="TSefer">
+    <Key>
+      <PropertyRef Name="SeferID" />
+    </Key>
+    <Property Name="SeferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Otobus" Type="Int32" />
+    <Property Name="Guzergah" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Saat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="TOtobus" Relationship="Self.FK_TSefer_TOtobus" FromRole="TSefer" ToRole="TOtobus" />
+  </EntityType>
+  <Association Name="FK_TBilet_TOtobus">
+    <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+    <End Role="TBilet" Type="Self.TBilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TBilet">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSefer_TOtobus">
+    <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+    <End Role="TSefer" Type="Self.TSefer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TSefer">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BiletSatisDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBilet" EntityType="Self.TBilet" />
+    <EntitySet Name="TIslem" EntityType="Self.TIslem" />
+    <EntitySet Name="TOtobus" EntityType="Self.TOtobus" />
+    <EntitySet Name="TSefer" EntityType="Self.TSefer" />
+    <AssociationSet Name="FK_TBilet_TOtobus" Association="Self.FK_TBilet_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TBilet" EntitySet="TBilet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSefer_TOtobus" Association="Self.FK_TSefer_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TSefer" EntitySet="TSefer" />
+    </AssociationSet>
+    <EntitySet Name="TYonetici" EntityType="BiletSatisDBModel.TYonetici" />
+  </EntityContainer>
+  <EntityType Name="TYonetici">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kullanici" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

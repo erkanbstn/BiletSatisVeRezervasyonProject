@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BiletSatisDBModelStoreContainer" CdmEntityContainer="BiletSatisDBEntities">
+    <EntitySetMapping Name="TBilet">
+      <EntityTypeMapping TypeName="BiletSatisDBModel.TBilet">
+        <MappingFragment StoreEntitySet="TBilet">
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="BiletID" ColumnName="BiletID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Kisi" ColumnName="Kisi" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="Koltuk" ColumnName="Koltuk" />
+          <ScalarProperty Name="Guzergah" ColumnName="Guzergah" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIslem">
+      <EntityTypeMapping TypeName="BiletSatisDBModel.TIslem">
+        <MappingFragment StoreEntitySet="TIslem">
+          <ScalarProperty Name="IslemID" ColumnName="IslemID" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOtobus">
+      <EntityTypeMapping TypeName="BiletSatisDBModel.TOtobus">
+        <MappingFragment StoreEntitySet="TOtobus">
+          <ScalarProperty Name="OtobusID" ColumnName="OtobusID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSefer">
+      <EntityTypeMapping TypeName="BiletSatisDBModel.TSefer">
+        <MappingFragment StoreEntitySet="TSefer">
+          <ScalarProperty Name="SeferID" ColumnName="SeferID" />
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="Guzergah" ColumnName="Guzergah" />
+          <ScalarProperty Name="Saat" ColumnName="Saat" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYonetici">
+      <EntityTypeMapping TypeName="BiletSatisDBModel.TYonetici">
+        <MappingFragment StoreEntitySet="TYonetici">
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Kullanici" ColumnName="Kullanici" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
